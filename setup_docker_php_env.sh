@@ -142,4 +142,11 @@ MYSQL_USER=testUser
 MYSQL_PASSWORD=testPass
 MYSQL_CHARSET=utf8mb4
 EOF
+cat << EOF > READMW.md
+[実行ファイル(github)](https://github.com/Merak-h/setup_docker_env/blob/main/setup_docker_php_env.sh)
+[解説(Qitta)](https://qiita.com/h_merak/items/2aff7ad451ecbea7f83a)
+.envに記載の環境変数は適宜変更してください。
+dockerのコンテナを起動するときは\`docker compose up -d \`
+dockerのコンテナを削除するときは\`docker compose down \`
+EOF
 docker compose up -d --build
