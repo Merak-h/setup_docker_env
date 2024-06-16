@@ -99,10 +99,12 @@ services:
       dockerfile: Dockerfile
     # コンテナ内で使用される環境変数を定義(SQLへのアクセス情報)
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: \${MYSQL_HOST}
+      MYSQL_CHARSET: \${MYSQL_CHARSET}
+      MYSQL_ROOT_PASSWORD: \${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: \${MYSQL_DATABASE}
+      MYSQL_USER: \${MYSQL_USER}
+      MYSQL_PASSWORD: \${MYSQL_PASSWORD}
     volumes:
       # ./srcフォルダをコンテナ内の/var/www/htmlにマウント
      - ./src:/var/www/html   
@@ -115,10 +117,12 @@ services:
     image: mysql:8.0
     # コンテナ内で使用される環境変数を定義
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: \${MYSQL_HOST}
+      MYSQL_CHARSET: \${MYSQL_CHARSET}
+      MYSQL_ROOT_PASSWORD: \${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: \${MYSQL_DATABASE}
+      MYSQL_USER: \${MYSQL_USER}
+      MYSQL_PASSWORD: \${MYSQL_PASSWORD}
     volumes:
       # 名前付きボリュームを MySQL コンテナに紐づける
       - mysqldata:/var/lib/mysql
@@ -131,9 +135,11 @@ volumes:
   mysqldata:
 EOF
 cat << EOF > .env
+MYSQL_HOST=mysql
 MYSQL_ROOT_PASSWORD=rootPass
 MYSQL_DATABASE=test-db
 MYSQL_USER=testUser
 MYSQL_PASSWORD=testPass
+MYSQL_CHARSET=utf8mb4
 EOF
 docker compose up -d --build
